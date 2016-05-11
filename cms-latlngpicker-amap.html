@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MppApp">
+
+<head>
+  <meta charset="UTF-8">
+  <title>area-select</title>
+  <script src="http://webapi.amap.com/maps?v=1.3&key=608d75903d29ad471362f8c58c550daf" charset="utf-8"></script>  <!-- 必须先引入百度地图API -->
+  <script src="http://cdn.bootcss.com/angular.js/1.4.3/angular.js"></script>
+  <script src="amap-selector-directive.js"></script>
+</head>
+
+<body ng-controller="MapPositionPointerController as main">
+  <cms-lat-lng-picker-amap
+   mpp-lat="main.lat"
+   mpp-lng="main.lng"
+   mpp-addr="main.addr"
+   mpp-control="main.control"
+   width="600"
+   height="600"
+   on-latlng-change=""></cms-lat-lng-picker-amap>
+
+  <input ng-model="main.lat" placeholder="lat">
+  <input ng-model="main.lng" placeholder="lng">
+  <input ng-model="main.addr" placeholder="address">
+  <button ng-click="main.control.search(main.addr)">search</button><!-- 由mpp 提供的一个search方法 -->
+
+  <p>{{main | json}}</p>
+  <script>
+    angular.module('MppApp', ['cms.latlngpicker.amap']);
+
+    (function() {
+      'use strict';
+      angular.module('MppApp').controller('MapPositionPointerController', function() {
+        this.addr = "中国 深圳 福田";
+        this.lat = 22.528578;
+        this.lng = 114.061087;
+        this.control = {};
+      });
+    })();
+  </script>
+</body>
+
+</html>
