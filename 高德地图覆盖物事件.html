@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+	<title>覆盖物事件</title>
+	<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=您申请的key值"></script>
+</head>
+<body>
+<div id="container"></div>
+<div id="tip">点击地图上的覆盖物试试</div>
+<script type="text/javascript">
+	//初始化地图对象，加载地图
+	var map = new AMap.Map("container", {
+		resizeEnable: true
+	});
+	var marker = new AMap.Marker({
+		map: map,
+		icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+		position: [116.405467, 39.907761]
+	});
+	var lineArr = [
+		[116.368904, 39.913423],
+		[116.382122, 39.901176],
+		[116.387271, 39.912501],
+		[116.398258, 39.904600]
+	];
+	var circle = new AMap.Circle({
+		map: map,
+		center: lineArr[0],          //设置线覆盖物路径
+		radius: 1500,
+		strokeColor: "#3366FF", //边框线颜色
+		strokeOpacity: 0.3,       //边框线透明度
+		strokeWeight: 3,        //边框线宽
+		fillColor: "#FFA500", //填充色
+		fillOpacity: 0.35//填充透明度
+	});
+	var polygonArr = [[116.403322, 39.920255],
+		[116.410703, 39.897555],
+		[116.402292, 39.892353],
+		[116.389846, 39.891365]];
+	var polygon = new AMap.Polygon({
+		map: map,
+		path: polygonArr,//设置多边形边界路径
+		strokeColor: "#FF33FF", //线颜色
+		strokeOpacity: 0.2, //线透明度
+		strokeWeight: 3,    //线宽
+		fillColor: "#1791fc", //填充色
+		fillOpacity: 0.35//填充透明度
+	});
+	map.setFitView();
+	marker.on('click', function() {
+		alert('您点击了点');
+	});
+	circle.on('click', function() {
+		alert('您点击了圆');
+	});
+	polygon.on('click', function() {
+		alert('您点击了面');
+	});
+</script>
+</body>
+</html>	
